@@ -1,0 +1,323 @@
+// 
+// Decompiled by Procyon v0.5.29
+// 
+
+package com.vontu.util.jdbc;
+
+import java.util.concurrent.Executor;
+import java.sql.SQLClientInfoException;
+import java.util.Properties;
+import java.sql.Struct;
+import java.sql.SQLXML;
+import java.sql.NClob;
+import java.sql.Clob;
+import java.sql.Blob;
+import java.sql.Array;
+import java.sql.Savepoint;
+import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
+import java.sql.SQLWarning;
+import java.util.Map;
+import java.sql.DatabaseMetaData;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.Connection;
+
+public class LoggingConnection implements Connection
+{
+    private final Connection _connection;
+    private final JDBCLogger _jdbcLogger;
+    
+    public Connection getDelegate() {
+        return this._connection;
+    }
+    
+    public LoggingConnection(final Connection connection) {
+        this._connection = connection;
+        this._jdbcLogger = new JDBCLogger(JDBCSessions.getJDBCSessionId());
+    }
+    
+    @Override
+    public void clearWarnings() throws SQLException {
+        this._connection.clearWarnings();
+    }
+    
+    @Override
+    public void close() throws SQLException {
+        this._connection.close();
+    }
+    
+    @Override
+    public void commit() throws SQLException {
+        this._connection.commit();
+    }
+    
+    @Override
+    public LoggingStatement createStatement() throws SQLException {
+        final Statement stmt = this._connection.createStatement();
+        return new LoggingStatement(stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public LoggingStatement createStatement(final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        final Statement stmt = this._connection.createStatement(resultSetType, resultSetConcurrency);
+        return new LoggingStatement(stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public LoggingStatement createStatement(final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        final Statement stmt = this._connection.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
+        return new LoggingStatement(stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public boolean getAutoCommit() throws SQLException {
+        return this._connection.getAutoCommit();
+    }
+    
+    @Override
+    public String getCatalog() throws SQLException {
+        return this._connection.getCatalog();
+    }
+    
+    @Override
+    public int getHoldability() throws SQLException {
+        return this._connection.getHoldability();
+    }
+    
+    @Override
+    public DatabaseMetaData getMetaData() throws SQLException {
+        return this._connection.getMetaData();
+    }
+    
+    @Override
+    public int getTransactionIsolation() throws SQLException {
+        return this._connection.getTransactionIsolation();
+    }
+    
+    @Override
+    public Map<String, Class<?>> getTypeMap() throws SQLException {
+        return this._connection.getTypeMap();
+    }
+    
+    @Override
+    public SQLWarning getWarnings() throws SQLException {
+        return this._connection.getWarnings();
+    }
+    
+    @Override
+    public boolean isClosed() throws SQLException {
+        return this._connection.isClosed();
+    }
+    
+    @Override
+    public boolean isReadOnly() throws SQLException {
+        return this._connection.isReadOnly();
+    }
+    
+    @Override
+    public String nativeSQL(final String sql) throws SQLException {
+        return this._connection.nativeSQL(sql);
+    }
+    
+    @Override
+    public CallableStatement prepareCall(final String sql) throws SQLException {
+        final CallableStatement stmt = this._connection.prepareCall(sql);
+        return new LoggingCallableStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public CallableStatement prepareCall(final String sql, final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        final CallableStatement stmt = this._connection.prepareCall(sql, resultSetType, resultSetConcurrency);
+        return new LoggingCallableStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public CallableStatement prepareCall(final String sql, final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        final CallableStatement stmt = this._connection.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+        return new LoggingCallableStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql) throws SQLException {
+        return new LoggingPreparedStatement(sql, this._connection.prepareStatement(sql), this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql, final int autoGeneratedKeys) throws SQLException {
+        final PreparedStatement stmt = this._connection.prepareStatement(sql, autoGeneratedKeys);
+        return new LoggingPreparedStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql, final int[] columnIndexes) throws SQLException {
+        final PreparedStatement stmt = this._connection.prepareStatement(sql, columnIndexes);
+        return new LoggingPreparedStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql, final String[] columnNames) throws SQLException {
+        final PreparedStatement stmt = this._connection.prepareStatement(sql, columnNames);
+        return new LoggingPreparedStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql, final int resultSetType, final int resultSetConcurrency) throws SQLException {
+        final PreparedStatement stmt = this._connection.prepareStatement(sql, resultSetType, resultSetConcurrency);
+        return new LoggingPreparedStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public PreparedStatement prepareStatement(final String sql, final int resultSetType, final int resultSetConcurrency, final int resultSetHoldability) throws SQLException {
+        final PreparedStatement stmt = this._connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+        return new LoggingPreparedStatement(sql, stmt, this._jdbcLogger);
+    }
+    
+    @Override
+    public void releaseSavepoint(final Savepoint savepoint) throws SQLException {
+        this._connection.releaseSavepoint(savepoint);
+    }
+    
+    @Override
+    public void rollback() throws SQLException {
+        this._connection.rollback();
+    }
+    
+    @Override
+    public void rollback(final Savepoint savepoint) throws SQLException {
+        this._connection.rollback(savepoint);
+    }
+    
+    @Override
+    public void setAutoCommit(final boolean autoCommit) throws SQLException {
+        this._connection.setAutoCommit(autoCommit);
+    }
+    
+    @Override
+    public void setCatalog(final String catalog) throws SQLException {
+        this._connection.setCatalog(catalog);
+    }
+    
+    @Override
+    public void setHoldability(final int holdability) throws SQLException {
+        this._connection.setHoldability(holdability);
+    }
+    
+    @Override
+    public void setReadOnly(final boolean readOnly) throws SQLException {
+        this._connection.setReadOnly(readOnly);
+    }
+    
+    @Override
+    public Savepoint setSavepoint() throws SQLException {
+        return this._connection.setSavepoint();
+    }
+    
+    @Override
+    public Savepoint setSavepoint(final String name) throws SQLException {
+        return this._connection.setSavepoint(name);
+    }
+    
+    @Override
+    public void setTransactionIsolation(final int level) throws SQLException {
+        this._connection.setTransactionIsolation(level);
+    }
+    
+    @Override
+    public void setTypeMap(final Map<String, Class<?>> map) throws SQLException {
+        this._connection.setTypeMap(map);
+    }
+    
+    @Override
+    public Array createArrayOf(final String typeName, final Object[] elements) throws SQLException {
+        return this._connection.createArrayOf(typeName, elements);
+    }
+    
+    @Override
+    public Blob createBlob() throws SQLException {
+        return this._connection.createBlob();
+    }
+    
+    @Override
+    public Clob createClob() throws SQLException {
+        return this._connection.createClob();
+    }
+    
+    @Override
+    public NClob createNClob() throws SQLException {
+        return this._connection.createNClob();
+    }
+    
+    @Override
+    public SQLXML createSQLXML() throws SQLException {
+        return this._connection.createSQLXML();
+    }
+    
+    @Override
+    public Struct createStruct(final String typeName, final Object[] attributes) throws SQLException {
+        return this._connection.createStruct(typeName, attributes);
+    }
+    
+    @Override
+    public Properties getClientInfo() throws SQLException {
+        return this._connection.getClientInfo();
+    }
+    
+    @Override
+    public String getClientInfo(final String name) throws SQLException {
+        return this._connection.getClientInfo(name);
+    }
+    
+    @Override
+    public boolean isValid(final int timeout) throws SQLException {
+        return this._connection.isValid(timeout);
+    }
+    
+    @Override
+    public void setClientInfo(final Properties properties) throws SQLClientInfoException {
+        this._connection.setClientInfo(properties);
+    }
+    
+    @Override
+    public void setClientInfo(final String name, final String value) throws SQLClientInfoException {
+        this._connection.setClientInfo(name, value);
+    }
+    
+    @Override
+    public boolean isWrapperFor(final Class<?> iface) throws SQLException {
+        return iface.isAssignableFrom(this.getClass()) || this._connection.isWrapperFor(iface);
+    }
+    
+    @Override
+    public <T> T unwrap(final Class<T> iface) throws SQLException {
+        if (iface.isAssignableFrom(this.getClass())) {
+            return (T)this;
+        }
+        return this._connection.unwrap(iface);
+    }
+    
+    @Override
+    public void setSchema(final String schema) throws SQLException {
+        this._connection.setSchema(schema);
+    }
+    
+    @Override
+    public String getSchema() throws SQLException {
+        return this._connection.getSchema();
+    }
+    
+    @Override
+    public void abort(final Executor executor) throws SQLException {
+        this._connection.abort(executor);
+    }
+    
+    @Override
+    public void setNetworkTimeout(final Executor executor, final int milliseconds) throws SQLException {
+        this._connection.setNetworkTimeout(executor, milliseconds);
+    }
+    
+    @Override
+    public int getNetworkTimeout() throws SQLException {
+        return this._connection.getNetworkTimeout();
+    }
+}
