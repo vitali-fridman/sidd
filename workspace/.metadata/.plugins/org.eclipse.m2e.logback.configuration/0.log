@@ -1,5 +1,0 @@
-2015-07-10 11:32:38,019 [Worker-4] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
-2015-07-18 11:43:46,812 [Worker-4] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
-2015-07-18 13:55:46,665 [Worker-0] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
-2015-07-29 08:52:57,286 [Worker-4] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
-2015-08-11 13:44:11,416 [Worker-0] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
