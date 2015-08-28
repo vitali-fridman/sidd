@@ -1,0 +1,12 @@
+/AsianTokenListManager.class
+/ConditionPredicate.class
+/CryptographicContent.class
+/DatabaseIndex.class
+/DatabaseInfoMatch.class
+/DatabaseInfoMatcher.class
+/DatabaseMatchConditionAdapter$DatabaseMatchPredicateAdapter.class
+/DatabaseMatchConditionAdapter$SingleColumnPredicateAdapter.class
+/DatabaseMatchConditionAdapter.class
+/DatabaseMatchConditionViolation.class
+/DatabaseProfileIndexDescriptor.class
+/DatabaseProfileIndexFactory.class

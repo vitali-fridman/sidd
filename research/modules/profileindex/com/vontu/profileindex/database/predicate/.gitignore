@@ -1,0 +1,10 @@
+/AndOperator.class
+/AndOperatorConverter.class
+/MultiColumnPredicateConverter.class
+/NotOperator.class
+/NotOperatorConverter.class
+/OperatorCollectionConverter.class
+/OrOperator.class
+/OrOperatorConverter.class
+/RecursivePredicateConverter.class
+/RowMatcherImpl.class

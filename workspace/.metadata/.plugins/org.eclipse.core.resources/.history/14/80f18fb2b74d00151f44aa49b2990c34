@@ -1,0 +1,10 @@
+/BasicDatabaseMatchCondition.class
+/BooleanOperator.class
+/DatabaseMatchCondition.class
+/DatabaseMatchPredicate.class
+/DatabaseMatchPredicateOperator.class
+/DocumentMatchCondition.class
+/FilteringDatabaseMatchCondition.class
+/MatchCondition.class
+/MultiColumnPredicate.class
+/PredicateOperator.class
