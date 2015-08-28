@@ -1,0 +1,17 @@
+/AbstractDocSourceDocStoreImpl.class
+/ContentExtractionProvider.class
+/ContentExtractionProviderFactory.class
+/ContentExtractionServiceForDocumentIndexer.class
+/CrackingProcessor.class
+/DocExtractionStats.class
+/DocSourceDocStoreTreeMapImpl.class
+/DocSourceDocWrapper.class
+/DocumentExtractionException.class
+/DocumentExtractor.class
+/DocumentIndexFileGeneratorImpl.class
+/DocumentRepository.class
+/DocumentRepositoryFactory.class
+/DocumentSourceIndexCreator$FakeEncodedString.class
+/DocumentSourceIndexCreator.class
+/DocumentSourceIndexJob.class
+/EndpointIndexCreatorFactory.class

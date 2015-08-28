@@ -1,0 +1,6 @@
+/DeleteFilesRequest.class
+/DeleteOrphanedFilesRequest.class
+/DeleteResultLogger.class
+/FileFactory.class
+/FileRemover.class
+/IndexFileReceiver.class
